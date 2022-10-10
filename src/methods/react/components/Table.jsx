@@ -1,46 +1,41 @@
 import React, { useMemo } from "react";
-import { useTable } from "react-table";
+import { useTable, useColumnOrder } from "react-table";
 
-const Table = () => {
-  const data = React.useMemo(
-    () => [
-      {
-        col1: "Hello",
-        col2: "World",
-      },
-      {
-        col1: "react-table",
-        col2: "rocks",
-      },
-      {
-        col1: "whatever",
-        col2: "you want",
-      },
-    ],
-    []
-  );
+const Table = ({ tableData, headers }) => {
+  // console.log(tableData, headers);
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "Column 1",
-        accessor: "col1", // accessor is the "key" in the data
-      },
-      {
-        Header: "Column 2",
-        accessor: "col2",
-      },
-    ],
-    []
-  );
+  const data = React.useMemo(() => tableData, [tableData]);
+  const columns = React.useMemo(() => headers, [headers]);
+  const tableInstance = useTable({ columns, data }, useColumnOrder);
 
-  const tableInstance = useTable({ columns, data });
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    //
+    visibleColumns,
+    setColumnOrder,
+  } = tableInstance;
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  function shuffle(arr) {
+    arr = [...arr];
+    const shuffled = [];
+    while (arr.length) {
+      const rand = Math.floor(Math.random() * arr.length);
+      shuffled.push(arr.splice(rand, 1)[0]);
+    }
+    return shuffled;
+  }
+
+  const randomizeColumns = () => {
+    setColumnOrder(shuffle(visibleColumns.map((d) => d.id)));
+  };
 
   return (
     <>
+      <button onClick={() => randomizeColumns({})}>Randomize Columns</button>
       <table {...getTableProps()}>
         <thead>
           {

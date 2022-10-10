@@ -1,13 +1,13 @@
 import React from "react";
 import Table from "./components/Table";
+import { returnData } from "../features/handleData";
 
-const Ext = (layout, element) => {
-  console.log(layout);
-
+const Ext = ({ layout, element }) => {
+  var { data, headers } = returnData(layout);
   return (
     <>
-      <h1>Test</h1>
-      <Table />
+      <h1 style={{ textAlign: "center" }}>Vis: {layout.visualization}</h1>
+      <Table tableData={data} headers={headers} />
     </>
   );
 };
