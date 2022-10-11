@@ -1,12 +1,32 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useTable, useColumnOrder } from "react-table";
+import { randomizeColumns } from "../../features/usefulMethods";
+
+import { qlik } from "../../paint";
 
 const Table = ({ tableData, headers }) => {
-  // console.log(tableData, headers);
+  // console.log("tableData", tableData, "headers", headers);
+
+  var hiddenColumns = tableData.map((el, i) => {
+    if (el["col" + i + "props"]?.showIF == "False") return "col" + i;
+  });
+
+  const [selectedId, setSelectedId] = useState(-1);
+  const [column, setColumn] = useState(-1);
+  // const [cellValue, setCellValue] = useState("red");
 
   const data = React.useMemo(() => tableData, [tableData]);
   const columns = React.useMemo(() => headers, [headers]);
-  const tableInstance = useTable({ columns, data }, useColumnOrder);
+  const tableInstance = useTable(
+    {
+      columns,
+      data,
+      initialState: {
+        hiddenColumns: hiddenColumns,
+      },
+    },
+    useColumnOrder
+  );
 
   const {
     getTableProps,
@@ -19,23 +39,32 @@ const Table = ({ tableData, headers }) => {
     setColumnOrder,
   } = tableInstance;
 
-  function shuffle(arr) {
-    arr = [...arr];
-    const shuffled = [];
-    while (arr.length) {
-      const rand = Math.floor(Math.random() * arr.length);
-      shuffled.push(arr.splice(rand, 1)[0]);
-    }
-    return shuffled;
-  }
+  const getCellValue = (e, j) => {
+    console.log("this cell:", e);
 
-  const randomizeColumns = () => {
-    setColumnOrder(shuffle(visibleColumns.map((d) => d.id)));
+    // Get nav props
+    e.nav = e.row.original[e.column.id + "nav"];
+    e.props = e.row.original[e.column.id + "props"];
+
+    // Navigates
+    if (e.nav?.sheet || e.nav?.sel || e.nav?.clear) {
+      qlik.fun.promiseNavigationHistory(
+        e.nav.clear,
+        e.nav.sel,
+        e.nav.sheet,
+        false
+      );
+    }
+
+    setSelectedId(e.row.id);
+    setColumn(j);
   };
 
   return (
     <>
-      <button onClick={() => randomizeColumns({})}>Randomize Columns</button>
+      <button onClick={() => randomizeColumns(setColumnOrder, visibleColumns)}>
+        Randomize Columns
+      </button>
       <table {...getTableProps()}>
         <thead>
           {
@@ -71,13 +100,18 @@ const Table = ({ tableData, headers }) => {
                 <tr {...row.getRowProps()}>
                   {
                     // Loop over the rows cells
-                    row.cells.map((cell) => {
+                    row.cells.map((cell, j) => {
                       // Apply the cell props
                       return (
-                        <td {...cell.getCellProps()}>
+                        <td
+                          onClick={() => getCellValue(cell, j)}
+                          {...cell.getCellProps()}
+                        >
                           {
                             // Render the cell contents
-                            cell.render("Cell")
+                            cell.render(
+                              "Cell" /*, {nav: cell.row.original[cell.column.id + "nav"]}*/
+                            )
                           }
                         </td>
                       );

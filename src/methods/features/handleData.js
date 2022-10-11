@@ -14,6 +14,21 @@ export const returnData = (layout) => {
     for (let j = 0; j < element.length; j++) {
       const elem = element[j];
       obj["col" + j] = elem.qText;
+      obj["col" + j + "nav"] = {
+        navType: elem?.qAttrExps?.qValues[0]?.qText,
+        navUrl: elem?.qAttrExps?.qValues[1]?.qText,
+        sheet: elem?.qAttrExps?.qValues[2]?.qText,
+        sel: elem?.qAttrExps?.qValues[3]?.qText,
+        clear: elem?.qAttrExps?.qValues[4]?.qText,
+      };
+      obj["col" + j + "props"] = {
+        showIF: elem?.qAttrExps?.qValues[5]?.qText,
+        bgColor: elem?.qAttrExps?.qValues[6]?.qText,
+        textColor: elem?.qAttrExps?.qValues[7]?.qText,
+        textAlign: elem?.qAttrExps?.qValues[8]?.qText,
+        textSize: elem?.qAttrExps?.qValues[9]?.qText,
+        headerAlign: elem?.qAttrExps?.qValues[10]?.qText,
+      };
     }
     data.push(obj);
   }
@@ -30,6 +45,10 @@ const getHeaders = (hc) => {
     return {
       Header: header,
       accessor: "col" + i,
+      Cell: (props) => {
+        // debugger;
+        return props.value;
+      },
     };
   });
 
