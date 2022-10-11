@@ -5,7 +5,7 @@ import Ext from "./react/Ext";
 
 import "./style.css";
 
-var qlik = window.require("qlik");
+export var qlik = window.require("qlik");
 
 export default function paint($element, layout) {
   if (!this.$scope.root) {
