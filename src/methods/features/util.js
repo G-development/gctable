@@ -163,6 +163,22 @@ export function cpDropDownString (ref, label, options, defaultValue, show) {
         return newString;
     }
 /** 
+* push componente ButtonGroup
+*/
+
+export function cpButtonGroup (ref, label, defaultValue = "", options, show) {
+    const newString = {
+        ref: ref,
+        label: label,
+        type: "string",
+        component: "buttongroup",
+        defaultValue: defaultValue,
+        options: options
+    }
+    if (show) { newString.show = show }
+    return newString;
+}
+/** 
 * push componente About
 */
 
