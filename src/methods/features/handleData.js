@@ -1,5 +1,7 @@
 import React from "react";
+import Header from "../react/components/Header";
 import Cell from "../react/components/Cell";
+import { createProps } from "../features/createProps";
 
 export const returnData = (layout) => {
   console.log("returnData", layout);
@@ -7,7 +9,7 @@ export const returnData = (layout) => {
   var hc = layout.qHyperCube;
   var mat = hc.qDataPages[0].qMatrix;
 
-  const headers = getHeaders(hc);
+  const headers = getHeaders(layout);
 
   const data = [];
 
@@ -36,6 +38,7 @@ export const returnData = (layout) => {
           textAlign: elem?.qAttrExps?.qValues[8]?.qText,
           textSize: elem?.qAttrExps?.qValues[9]?.qText,
         },
+        gct: createProps(layout),
       };
     }
     data.push(obj);
@@ -43,7 +46,8 @@ export const returnData = (layout) => {
   return { data, headers };
 };
 
-const getHeaders = (hc) => {
+const getHeaders = (layout) => {
+  var hc = layout.qHyperCube;
   var dimHeaders = hc.qDimensionInfo.map((dim, i) => {
       return {
         title: dim.qFallbackTitle,
@@ -69,15 +73,16 @@ const getHeaders = (hc) => {
 
   var headers = headerTot.map((header, i) => {
     return {
-      Header: header.title,
+      Header: (props) => <Header props={props} />, //header.title,
       accessor: header.title,
-      width: parseInt(header.width),
+      width: !isNaN(header.width) ? parseInt(header.width) : null,
       headerCSS: {
         align: header.align,
         color: header.color,
         background: header.background,
       },
       Cell: (props) => <Cell props={props} />,
+      gct: createProps(layout),
     };
   });
 

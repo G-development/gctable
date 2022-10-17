@@ -43,25 +43,9 @@ const Table = ({ tableData, headers }) => {
             headerGroups.map((headerGroup) => (
               // Apply the header row props
               <tr {...headerGroup.getHeaderGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  headerGroup.headers.map((column) => (
-                    // Apply the header cell props
-                    <th
-                      {...column.getHeaderProps({
-                        style: {
-                          textAlign: column.headerCSS.align,
-                          color: column.headerCSS.color,
-                          backgroundColor: column.headerCSS.background,
-                        },
-                      })}
-                    >
-                      {
-                        column.render("Header") // Render the header
-                      }
-                    </th>
-                  ))
-                }
+                {headerGroup.headers.map((column) => {
+                  return column.render("Header");
+                })}
               </tr>
             ))
           }
@@ -77,10 +61,7 @@ const Table = ({ tableData, headers }) => {
                 // Apply the row props
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    return cell.render("Cell", {
-                      nav: cell.row.original[cell.column.id].nav,
-                      settings: cell.row.original[cell.column.id].props,
-                    });
+                    return cell.render("Cell");
                   })}
                 </tr>
               );
