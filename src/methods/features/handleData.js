@@ -1,3 +1,6 @@
+import React from "react";
+import Cell from "../react/components/Cell";
+
 export const returnData = (layout) => {
   console.log("returnData", layout);
 
@@ -27,7 +30,7 @@ export const returnData = (layout) => {
         textColor: elem?.qAttrExps?.qValues[7]?.qText,
         textAlign: elem?.qAttrExps?.qValues[8]?.qText,
         textSize: elem?.qAttrExps?.qValues[9]?.qText,
-        headerAlign: elem?.qAttrExps?.qValues[10]?.qText,
+        // headerAlign: elem?.qAttrExps?.qValues[10]?.qText,
       };
     }
     data.push(obj);
@@ -37,18 +40,41 @@ export const returnData = (layout) => {
 };
 
 const getHeaders = (hc) => {
-  var dimHeaders = hc.qDimensionInfo.map((dim) => dim.qFallbackTitle),
-    measHeaders = hc.qMeasureInfo.map((meas) => meas.qFallbackTitle),
+  var dimHeaders = hc.qDimensionInfo.map((dim, i) => {
+      return {
+        title: dim.qFallbackTitle,
+        align: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[10]?.qText,
+        width: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[11]?.qNum,
+        color: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[12]?.qText,
+        background:
+          hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[13]?.qText,
+      };
+    }),
+    measHeaders = hc.qMeasureInfo.map((meas, i) => {
+      let j = i + hc.qDimensionInfo.length;
+      return {
+        title: meas.qFallbackTitle,
+        align: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[10]?.qText,
+        width: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[11]?.qNum,
+        color: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[12]?.qText,
+        background:
+          hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[13]?.qText,
+      };
+    }),
     headerTot = dimHeaders.concat(measHeaders);
 
   var headers = headerTot.map((header, i) => {
+    console.log(header);
     return {
-      Header: header,
+      Header: header.title,
       accessor: "col" + i,
-      Cell: (props) => {
-        // debugger;
-        return props.value;
+      width: parseInt(header.width),
+      headerCSS: {
+        align: header.align,
+        color: header.color,
+        background: header.background,
       },
+      Cell: (props) => <Cell props={props} />,
     };
   });
 

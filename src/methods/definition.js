@@ -23,6 +23,9 @@ export default {
 			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='left'", textAlign),
 			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
 			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
+			colWidth: cpString("qAttributeExpressions.11.qExpression", "Column width", "", "always", "string", "expression"),
+			headerColor: cpString("qAttributeExpressions.12.qExpression", "Header text color", "", "always", "string", "expression"),
+			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "='#5CEBE8'", "always", "string", "expression"),
 		}
 	},
 	measures: {
@@ -43,7 +46,10 @@ export default {
 			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='left'", textAlign),
 			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
 			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
-}
+			colWidth: cpString("qAttributeExpressions.11.qExpression", "Column width", "", "always", "string", "expression"),
+			headerColor: cpString("qAttributeExpressions.12.qExpression", "Header text color", "", "always", "string", "expression"),
+			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "='#5CEBE8'", "always", "string", "expression"),
+		}
 	},
     settings: {
       	uses: "settings",
