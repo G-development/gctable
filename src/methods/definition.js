@@ -1,4 +1,4 @@
-import { cpAbout, cpString, cpButtonGroup } from "./features/util";
+import { cpAbout, cpString, cpButtonGroup, cpSwitch } from "./features/util";
 import { navType, textAlign, headerAlign } from "./features/definitionUtils";
 
 export default {
@@ -59,6 +59,8 @@ export default {
 		label: "Configuration",
 		items: {
        		// Insert component
+			padding: cpString("GCT.CSS.padding", "Cell padding", "", "optional", "string"),
+			fixedHeader: cpSwitch("GCT.CSS.fixedHeader", "Fixed header", "Yes", "No", false),
       },
     },
 
