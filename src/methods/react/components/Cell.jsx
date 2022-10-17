@@ -27,7 +27,7 @@ const Cell = ({ props }) => {
         textAlign: textAlign,
       }}
     >
-      {props.value}
+      {props.value.value}
     </td>
   );
 };

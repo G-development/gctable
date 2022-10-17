@@ -1,13 +1,12 @@
 import React, { useMemo, useState } from "react";
-import { useTable, useColumnOrder } from "react-table";
-import { randomizeColumns } from "../../features/usefulMethods";
+import { useTable, useColumnOrder, useFilters } from "react-table";
+import {
+  getHiddenColumns,
+  randomizeColumns,
+} from "../../features/usefulMethods";
 
 const Table = ({ tableData, headers }) => {
   // console.log("tableData", tableData, "headers", headers);
-
-  var hiddenColumns = tableData.map((el, i) => {
-    if (el["col" + i + "props"]?.showIF == "False") return "col" + i;
-  });
 
   const data = React.useMemo(() => tableData, [tableData]);
   const columns = React.useMemo(() => headers, [headers]);
@@ -16,7 +15,7 @@ const Table = ({ tableData, headers }) => {
       columns,
       data,
       initialState: {
-        hiddenColumns: hiddenColumns,
+        hiddenColumns: getHiddenColumns(tableData),
       },
     },
     useColumnOrder
@@ -79,8 +78,8 @@ const Table = ({ tableData, headers }) => {
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     return cell.render("Cell", {
-                      nav: cell.row.original[cell.column.id + "nav"],
-                      settings: cell.row.original[cell.column.id + "props"],
+                      nav: cell.row.original[cell.column.id].nav,
+                      settings: cell.row.original[cell.column.id].props,
                     });
                   })}
                 </tr>
