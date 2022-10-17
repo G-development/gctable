@@ -13,5 +13,5 @@ export default function paint($element, layout) {
     const root = createRoot(container);
     this.$scope.root = root;
   }
-  this.$scope.root.render(<Ext layout={layout} element={$element} />);
+  this.$scope.root.render(<Ext layout={layout} />);
 }

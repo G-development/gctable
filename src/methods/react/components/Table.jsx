@@ -2,18 +2,12 @@ import React, { useMemo, useState } from "react";
 import { useTable, useColumnOrder } from "react-table";
 import { randomizeColumns } from "../../features/usefulMethods";
 
-import { qlik } from "../../paint";
-
 const Table = ({ tableData, headers }) => {
   // console.log("tableData", tableData, "headers", headers);
 
   var hiddenColumns = tableData.map((el, i) => {
     if (el["col" + i + "props"]?.showIF == "False") return "col" + i;
   });
-
-  const [selectedId, setSelectedId] = useState(-1);
-  const [column, setColumn] = useState(-1);
-  // const [cellValue, setCellValue] = useState("red");
 
   const data = React.useMemo(() => tableData, [tableData]);
   const columns = React.useMemo(() => headers, [headers]);
@@ -34,37 +28,15 @@ const Table = ({ tableData, headers }) => {
     headerGroups,
     rows,
     prepareRow,
-    //
-    visibleColumns,
-    setColumnOrder,
+    // visibleColumns,
+    // setColumnOrder,
   } = tableInstance;
-
-  const getCellValue = (e, j) => {
-    console.log("this cell:", e);
-
-    // Get nav props
-    e.nav = e.row.original[e.column.id + "nav"];
-    e.props = e.row.original[e.column.id + "props"];
-
-    // Navigates
-    if (e.nav?.sheet || e.nav?.sel || e.nav?.clear) {
-      qlik.fun.promiseNavigationHistory(
-        e.nav.clear,
-        e.nav.sel,
-        e.nav.sheet,
-        false
-      );
-    }
-
-    setSelectedId(e.row.id);
-    setColumn(j);
-  };
 
   return (
     <>
-      <button onClick={() => randomizeColumns(setColumnOrder, visibleColumns)}>
+      {/* <button onClick={() => randomizeColumns(setColumnOrder, visibleColumns)}>
         Randomize Columns
-      </button>
+      </button> */}
       <table {...getTableProps()}>
         <thead>
           {
@@ -76,10 +48,17 @@ const Table = ({ tableData, headers }) => {
                   // Loop over the headers in each row
                   headerGroup.headers.map((column) => (
                     // Apply the header cell props
-                    <th {...column.getHeaderProps()}>
+                    <th
+                      {...column.getHeaderProps({
+                        style: {
+                          textAlign: column.headerCSS.align,
+                          color: column.headerCSS.color,
+                          backgroundColor: column.headerCSS.background,
+                        },
+                      })}
+                    >
                       {
-                        // Render the header
-                        column.render("Header")
+                        column.render("Header") // Render the header
                       }
                     </th>
                   ))
@@ -98,25 +77,12 @@ const Table = ({ tableData, headers }) => {
               return (
                 // Apply the row props
                 <tr {...row.getRowProps()}>
-                  {
-                    // Loop over the rows cells
-                    row.cells.map((cell, j) => {
-                      // Apply the cell props
-                      return (
-                        <td
-                          onClick={() => getCellValue(cell, j)}
-                          {...cell.getCellProps()}
-                        >
-                          {
-                            // Render the cell contents
-                            cell.render(
-                              "Cell" /*, {nav: cell.row.original[cell.column.id + "nav"]}*/
-                            )
-                          }
-                        </td>
-                      );
-                    })
-                  }
+                  {row.cells.map((cell) => {
+                    return cell.render("Cell", {
+                      nav: cell.row.original[cell.column.id + "nav"],
+                      settings: cell.row.original[cell.column.id + "props"],
+                    });
+                  })}
                 </tr>
               );
             })
