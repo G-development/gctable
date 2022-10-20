@@ -1,4 +1,4 @@
-import { cpAbout, cpString, cpButtonGroup, cpSwitch } from "./features/util";
+import { cpAbout, cpString, cpButtonGroup, cpSwitch, cpText } from "./features/util";
 import { navType, textAlign, headerAlign } from "./features/definitionUtils";
 
 export default {
@@ -63,7 +63,10 @@ export default {
 			showBorder: cpSwitch("GCT.CSS.border", "Show border", "Yes", "No", false),
 			borderSize: cpString("GCT.CSS.borderSize", "Custom cell border", "", "", "string", null, (data) => data.GCT.CSS.border),
 			fixedHeader: cpSwitch("GCT.CSS.fixedHeader", "Fixed header", "Yes", "No", false),
-      },
+			divider: cpText(" "),
+			warning: cpText("Custom order requires a page refresh!"),
+			customOrder: cpString("GCT.customOrder", 'Column order: ["name", "name",...]', "", "", "string"),
+		},
     },
 
     about: cpAbout("extension", "1.0.0"),

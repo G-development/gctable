@@ -22,6 +22,10 @@ export const createProps = (layout) => {
       gct.CSS.fixedHeader && gct.CSS.fixedHeader != null && gct.CSS.fixedHeader
         ? { position: "sticky", top: 0 }
         : false,
+    customOrder:
+      gct.customOrder && gct.customOrder != null && gct.customOrder
+        ? gct.customOrder
+        : false,
   };
   return allProps;
 };

@@ -5,8 +5,8 @@ import {
   randomizeColumns,
 } from "../../features/usefulMethods";
 
-const Table = ({ tableData, headers }) => {
-  // console.log("tableData", tableData, "headers", headers);
+const Table = ({ tableData, headers, gct }) => {
+  // console.log("tableData", tableData, "headers", headers, "gct", gct);
 
   const data = React.useMemo(() => tableData, [tableData]);
   const columns = React.useMemo(() => headers, [headers]);
@@ -16,6 +16,7 @@ const Table = ({ tableData, headers }) => {
       data,
       initialState: {
         hiddenColumns: getHiddenColumns(tableData),
+        columnOrder: eval(gct.customOrder),
       },
     },
     useColumnOrder
@@ -33,7 +34,18 @@ const Table = ({ tableData, headers }) => {
 
   return (
     <>
-      {/* <button onClick={() => randomizeColumns(setColumnOrder, visibleColumns)}>
+      {/* <button
+        onClick={() => {
+          debugger;
+          console.log(
+            "Current order:",
+            eval(gct.customOrder),
+            visibleColumns.map((column) => column.id)
+          );
+          setColumnOrder(eval(gct.customOrder));
+          // return randomizeColumns(setColumnOrder, visibleColumns);
+        }}
+      >
         Randomize Columns
       </button> */}
       <table {...getTableProps()}>
