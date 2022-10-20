@@ -1,13 +1,12 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useTable, useColumnOrder } from "react-table";
-import { randomizeColumns } from "../../features/usefulMethods";
+import {
+  getHiddenColumns,
+  //randomizeColumns,
+} from "../../features/usefulMethods";
 
-const Table = ({ tableData, headers }) => {
-  // console.log("tableData", tableData, "headers", headers);
-
-  var hiddenColumns = tableData.map((el, i) => {
-    if (el["col" + i + "props"]?.showIF == "False") return "col" + i;
-  });
+const Table = ({ tableData, headers, gct }) => {
+  // console.log("tableData", tableData, "headers", headers, "gct", gct);
 
   const data = React.useMemo(() => tableData, [tableData]);
   const columns = React.useMemo(() => headers, [headers]);
@@ -16,7 +15,8 @@ const Table = ({ tableData, headers }) => {
       columns,
       data,
       initialState: {
-        hiddenColumns: hiddenColumns,
+        hiddenColumns: getHiddenColumns(tableData),
+        columnOrder: eval(gct.customOrder),
       },
     },
     useColumnOrder
@@ -34,7 +34,12 @@ const Table = ({ tableData, headers }) => {
 
   return (
     <>
-      {/* <button onClick={() => randomizeColumns(setColumnOrder, visibleColumns)}>
+      {/* <button
+        onClick={() => {
+          setColumnOrder(eval(gct.customOrder));
+          // return randomizeColumns(setColumnOrder, visibleColumns);
+        }}
+      >
         Randomize Columns
       </button> */}
       <table {...getTableProps()}>
@@ -44,25 +49,9 @@ const Table = ({ tableData, headers }) => {
             headerGroups.map((headerGroup) => (
               // Apply the header row props
               <tr {...headerGroup.getHeaderGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  headerGroup.headers.map((column) => (
-                    // Apply the header cell props
-                    <th
-                      {...column.getHeaderProps({
-                        style: {
-                          textAlign: column.headerCSS.align,
-                          color: column.headerCSS.color,
-                          backgroundColor: column.headerCSS.background,
-                        },
-                      })}
-                    >
-                      {
-                        column.render("Header") // Render the header
-                      }
-                    </th>
-                  ))
-                }
+                {headerGroup.headers.map((column) => {
+                  return column.render("Header");
+                })}
               </tr>
             ))
           }
@@ -78,10 +67,7 @@ const Table = ({ tableData, headers }) => {
                 // Apply the row props
                 <tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    return cell.render("Cell", {
-                      nav: cell.row.original[cell.column.id + "nav"],
-                      settings: cell.row.original[cell.column.id + "props"],
-                    });
+                    return cell.render("Cell");
                   })}
                 </tr>
               );

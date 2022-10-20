@@ -1,4 +1,4 @@
-import { cpAbout, cpString, cpButtonGroup } from "./features/util";
+import { cpAbout, cpString, cpButtonGroup, cpSwitch, cpText } from "./features/util";
 import { navType, textAlign, headerAlign } from "./features/definitionUtils";
 
 export default {
@@ -25,7 +25,7 @@ export default {
 			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
 			colWidth: cpString("qAttributeExpressions.11.qExpression", "Column width", "", "always", "string", "expression"),
 			headerColor: cpString("qAttributeExpressions.12.qExpression", "Header text color", "", "always", "string", "expression"),
-			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "='#5CEBE8'", "always", "string", "expression"),
+			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "", "always", "string", "expression"),
 		}
 	},
 	measures: {
@@ -48,7 +48,7 @@ export default {
 			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
 			colWidth: cpString("qAttributeExpressions.11.qExpression", "Column width", "", "always", "string", "expression"),
 			headerColor: cpString("qAttributeExpressions.12.qExpression", "Header text color", "", "always", "string", "expression"),
-			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "='#5CEBE8'", "always", "string", "expression"),
+			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "", "always", "string", "expression"),
 		}
 	},
     settings: {
@@ -59,7 +59,15 @@ export default {
 		label: "Configuration",
 		items: {
        		// Insert component
-      },
+			headerColor: cpString("GCT.CSS.headerColor", "Header color", "", "", "string"),
+			padding: cpString("GCT.CSS.padding", "Cell padding", "", "", "string"),
+			showBorder: cpSwitch("GCT.CSS.border", "Show border", "Yes", "No", false),
+			borderSize: cpString("GCT.CSS.borderSize", "Custom cell border", "", "", "string", null, (data) => data.GCT.CSS.border),
+			fixedHeader: cpSwitch("GCT.CSS.fixedHeader", "Fixed header", "Yes", "No", false),
+			divider: cpText(" "),
+			warning: cpText("Custom order requires a page refresh!"),
+			customOrder: cpString("GCT.customOrder", 'Column order: ["name", "name",...]', "", "", "string"),
+		},
     },
 
     about: cpAbout("extension", "1.0.0"),
