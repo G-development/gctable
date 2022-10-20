@@ -15,7 +15,9 @@ const Header = ({ props }) => {
         width: self.width,
         textAlign: self.headerCSS.align,
         color: self.headerCSS.color,
-        backgroundColor: self.headerCSS.background,
+        backgroundColor: self.headerCSS.background
+          ? self.headerCSS.background
+          : self.gct.headerColor,
         padding: self.gct.padding,
         position: self.gct.fixedHeader.position,
         top: self.gct.fixedHeader.top,

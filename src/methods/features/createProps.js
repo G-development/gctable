@@ -3,6 +3,12 @@ export const createProps = (layout) => {
   var allProps = {
     /* Configuration */
     /* CSS */
+    headerColor:
+      gct.CSS.headerColor &&
+      gct.CSS.headerColor != null &&
+      gct.CSS.headerColor != ""
+        ? gct.CSS.headerColor
+        : "lightgrey",
     padding:
       gct.CSS.padding && gct.CSS.padding != null && gct.CSS.padding != ""
         ? gct.CSS.padding
@@ -22,6 +28,7 @@ export const createProps = (layout) => {
       gct.CSS.fixedHeader && gct.CSS.fixedHeader != null && gct.CSS.fixedHeader
         ? { position: "sticky", top: 0 }
         : false,
+    /* OTHER */
     customOrder:
       gct.customOrder && gct.customOrder != null && gct.customOrder
         ? gct.customOrder
