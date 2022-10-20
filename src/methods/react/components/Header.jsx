@@ -3,21 +3,23 @@ import React from "react";
 // <th colspan="1" role="columnheader" style="text-align: center; background-color: rgb(92, 235, 232);">Sum(SPT_Size)</th>
 
 const Header = ({ props }) => {
+  var self = props.column;
   return (
     <th
       onClick={() => {
-        console.log("this cell:", props);
+        console.log("this header:", props);
       }}
       style={{
         role: "columnheader",
         colspan: "1",
-        width: props.column.width,
-        textAlign: props.column.headerCSS.align,
-        color: props.column.headerCSS.color,
-        backgroundColor: props.column.headerCSS.background,
-        padding: props.column.gct.padding,
-        position: props.column.gct.fixedHeader.position,
-        top: props.column.gct.fixedHeader.top,
+        width: self.width,
+        textAlign: self.headerCSS.align,
+        color: self.headerCSS.color,
+        backgroundColor: self.headerCSS.background,
+        padding: self.gct.padding,
+        position: self.gct.fixedHeader.position,
+        top: self.gct.fixedHeader.top,
+        border: self.gct.borderSize,
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-around" }}>
@@ -25,6 +27,7 @@ const Header = ({ props }) => {
         <img
           src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-2.png"
           width="16px;"
+          style={{ cursor: "pointer" }}
         />
       </div>
     </th>

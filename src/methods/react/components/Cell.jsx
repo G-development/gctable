@@ -27,6 +27,7 @@ const Cell = ({ props }) => {
         fontSize: textSize,
         textAlign: textAlign,
         padding: self.gct.padding,
+        border: self.gct.borderSize,
       }}
     >
       {self.value}
