@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from "react";
-import { useTable, useColumnOrder, useFilters } from "react-table";
+import React, { useMemo } from "react";
+import { useTable, useColumnOrder } from "react-table";
 import {
   getHiddenColumns,
-  randomizeColumns,
+  //randomizeColumns,
 } from "../../features/usefulMethods";
 
 const Table = ({ tableData, headers, gct }) => {
@@ -36,12 +36,6 @@ const Table = ({ tableData, headers, gct }) => {
     <>
       {/* <button
         onClick={() => {
-          debugger;
-          console.log(
-            "Current order:",
-            eval(gct.customOrder),
-            visibleColumns.map((column) => column.id)
-          );
           setColumnOrder(eval(gct.customOrder));
           // return randomizeColumns(setColumnOrder, visibleColumns);
         }}

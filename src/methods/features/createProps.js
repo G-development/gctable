@@ -8,7 +8,7 @@ export const createProps = (layout) => {
       gct.CSS.headerColor != null &&
       gct.CSS.headerColor != ""
         ? gct.CSS.headerColor
-        : "lightgrey",
+        : "#f2f2f2",
     padding:
       gct.CSS.padding && gct.CSS.padding != null && gct.CSS.padding != ""
         ? gct.CSS.padding
@@ -22,7 +22,7 @@ export const createProps = (layout) => {
         gct.CSS.borderSize != null &&
         gct.CSS.borderSize != ""
         ? gct.CSS.borderSize
-        : "0.02em solid lightgray"
+        : "0.02em solid #f2f2f2"
       : null,
     fixedHeader:
       gct.CSS.fixedHeader && gct.CSS.fixedHeader != null && gct.CSS.fixedHeader

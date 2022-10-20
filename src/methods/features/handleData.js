@@ -73,7 +73,7 @@ const getHeaders = (layout) => {
 
   var headers = headerTot.map((header, i) => {
     return {
-      Header: (props) => <Header props={props} />, //header.title,
+      Header: (props) => <Header props={props} />,
       accessor: header.title,
       width: !isNaN(header.width) ? parseInt(header.width) : null,
       headerCSS: {
