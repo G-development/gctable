@@ -7,6 +7,17 @@ export const createProps = (layout) => {
       gct.CSS.padding && gct.CSS.padding != null && gct.CSS.padding != ""
         ? gct.CSS.padding
         : "0.4rem",
+    border:
+      gct.CSS.border && gct.CSS.border != null && gct.CSS.border != ""
+        ? gct.CSS.border
+        : null,
+    borderSize: gct.CSS.border
+      ? gct.CSS.borderSize &&
+        gct.CSS.borderSize != null &&
+        gct.CSS.borderSize != ""
+        ? gct.CSS.borderSize
+        : "0.02em solid lightgray"
+      : null,
     fixedHeader:
       gct.CSS.fixedHeader && gct.CSS.fixedHeader != null && gct.CSS.fixedHeader
         ? { position: "sticky", top: 0 }

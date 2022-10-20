@@ -59,7 +59,9 @@ export default {
 		label: "Configuration",
 		items: {
        		// Insert component
-			padding: cpString("GCT.CSS.padding", "Cell padding", "", "optional", "string"),
+			padding: cpString("GCT.CSS.padding", "Cell padding", "", "", "string"),
+			showBorder: cpSwitch("GCT.CSS.border", "Show border", "Yes", "No", false),
+			borderSize: cpString("GCT.CSS.borderSize", "Custom cell border", "", "", "string", null, (data) => data.GCT.CSS.border),
 			fixedHeader: cpSwitch("GCT.CSS.fixedHeader", "Fixed header", "Yes", "No", false),
       },
     },
