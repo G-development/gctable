@@ -1,81 +1,61 @@
 import React, { useMemo } from "react";
-import { useTable, useColumnOrder } from "react-table";
-import {
-  getHiddenColumns,
-  //randomizeColumns,
-} from "../../features/usefulMethods";
+import { useTable, useColumnOrder, useFilters } from "react-table";
+import { getHiddenColumns } from "../../features/usefulMethods";
+import { matchSorterFn } from "../../features/sorting";
 
 const Table = ({ tableData, headers, gct }) => {
   // console.log("tableData", tableData, "headers", headers, "gct", gct);
 
-  const data = React.useMemo(() => tableData, [tableData]);
-  const columns = React.useMemo(() => headers, [headers]);
+  const data = useMemo(() => tableData, [tableData]);
+  const columns = useMemo(() => headers, [headers]);
+  const defaultColumn = useMemo(() => ({ Filter: "" }), []);
+  const filterTypes = useMemo(() => ({ rankedMatchSorter: matchSorterFn }), []);
   const tableInstance = useTable(
     {
       columns,
       data,
+      defaultColumn,
+      filterTypes,
       initialState: {
         hiddenColumns: getHiddenColumns(tableData),
         columnOrder: eval(gct.customOrder),
       },
     },
-    useColumnOrder
+    useColumnOrder,
+    useFilters
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    // visibleColumns,
-    // setColumnOrder,
-  } = tableInstance;
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    tableInstance;
 
   return (
-    <>
-      {/* <button
-        onClick={() => {
-          setColumnOrder(eval(gct.customOrder));
-          // return randomizeColumns(setColumnOrder, visibleColumns);
-        }}
-      >
-        Randomize Columns
-      </button> */}
-      <table {...getTableProps()}>
-        <thead>
-          {
-            // Loop over the header rows
-            headerGroups.map((headerGroup) => (
-              // Apply the header row props
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => {
-                  return column.render("Header");
-                })}
-              </tr>
-            ))
-          }
-        </thead>
-        {/* Apply the table body props */}
-        <tbody {...getTableBodyProps()}>
-          {
-            // Loop over the table rows
-            rows.map((row) => {
-              // Prepare the row for display
-              prepareRow(row);
-              return (
-                // Apply the row props
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return cell.render("Cell");
-                  })}
-                </tr>
-              );
-            })
-          }
-        </tbody>
-      </table>
-    </>
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map((headerGroup) => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <th {...column.getHeaderProps()}>
+                {column.render("Header")}
+                {/* Render the columns filter UI */}
+                {/* {column.canFilter ? column.render("Filter") : null} */}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row, i) => {
+          prepareRow(row);
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell) => {
+                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 
