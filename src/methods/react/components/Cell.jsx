@@ -5,7 +5,7 @@ const Cell = ({ props }) => {
   var self = props.value;
   let { textColor, textSize, textAlign, bgColor } = self.props;
   return (
-    <div
+    <td
       onClick={() => {
         console.log("this cell:", props);
         if (
@@ -31,7 +31,7 @@ const Cell = ({ props }) => {
       }}
     >
       {self.value}
-    </div>
+    </td>
   );
 };
 

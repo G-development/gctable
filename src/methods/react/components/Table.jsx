@@ -34,11 +34,9 @@ const Table = ({ tableData, headers, gct }) => {
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>
+              <React.Fragment key={column.getHeaderProps().key}>
                 {column.render("Header")}
-                {/* Render the columns filter UI */}
-                {/* {column.canFilter ? column.render("Filter") : null} */}
-              </th>
+              </React.Fragment>
             ))}
           </tr>
         ))}
@@ -48,9 +46,11 @@ const Table = ({ tableData, headers, gct }) => {
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-              })}
+              {row.cells.map((cell) => (
+                <React.Fragment key={cell.getCellProps().key}>
+                  {cell.render("Cell")}
+                </React.Fragment>
+              ))}
             </tr>
           );
         })}

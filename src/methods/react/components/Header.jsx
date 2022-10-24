@@ -4,8 +4,7 @@ import { DropdownFilter, TextSearchFilter } from "../../features/filters";
 const Header = ({ props }) => {
   var self = props.column;
   return (
-    <div
-      {...self.getHeaderProps()}
+    <th
       onClick={() => {
         console.log("this header:", props);
       }}
@@ -37,7 +36,7 @@ const Header = ({ props }) => {
           </>
         )}
       </div>
-    </div>
+    </th>
   );
 };
 
