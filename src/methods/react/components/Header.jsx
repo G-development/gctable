@@ -1,7 +1,8 @@
 import React from "react";
-import { DropdownFilter, TextSearchFilter } from "../../features/filters";
+import QlikFilter from "./QlikFilter";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css"; // optional
+import "tippy.js/themes/light.css";
 
 const Header = ({ props }) => {
   var self = props.column;
@@ -25,13 +26,14 @@ const Header = ({ props }) => {
         border: self.gct.borderSize,
       }}
     >
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         {self.id}
         {self.canFilter && (
           <>
             <Tippy
-              theme="GCTable"
-              content=<DropdownFilter column={props.column} />
+              // theme="GCTable"
+              theme="light"
+              content=<QlikFilter column={props.column} />
               allowHTML={true}
               interactive={true}
               interactiveBorder={20}
@@ -39,11 +41,11 @@ const Header = ({ props }) => {
               trigger="click"
               style={{ backgroundColor: "white" }}
             >
-              <img
-                src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-2.png"
-                width="16px;"
-                style={{ cursor: "pointer", margin: "0 10px;" }}
-              />
+              <span
+                className="lui-icon  lui-icon--search"
+                aria-hidden="true"
+                style={{ cursor: "pointer", margin: "0 10px" }}
+              ></span>
             </Tippy>
           </>
         )}
