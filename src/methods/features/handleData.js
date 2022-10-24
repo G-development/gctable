@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "../react/components/Header";
 import Cell from "../react/components/Cell";
+import { DropdownFilter, TextSearchFilter } from "./filters";
+
 import { createProps } from "../features/createProps";
 
 export const returnData = (layout) => {
@@ -50,6 +52,7 @@ const getHeaders = (layout) => {
   var hc = layout.qHyperCube;
   var dimHeaders = hc.qDimensionInfo.map((dim, i) => {
       return {
+        columnType: "dimension",
         title: dim.qFallbackTitle,
         align: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[10]?.qText,
         width: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[11]?.qNum,
@@ -61,6 +64,7 @@ const getHeaders = (layout) => {
     measHeaders = hc.qMeasureInfo.map((meas, i) => {
       let j = i + hc.qDimensionInfo.length;
       return {
+        columnType: "measure",
         title: meas.qFallbackTitle,
         align: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[10]?.qText,
         width: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[11]?.qNum,
@@ -71,17 +75,20 @@ const getHeaders = (layout) => {
     }),
     headerTot = dimHeaders.concat(measHeaders);
 
-  var headers = headerTot.map((header, i) => {
+  var headers = headerTot.map((header) => {
     return {
       Header: (props) => <Header props={props} />,
       accessor: header.title,
+      Cell: (props) => <Cell props={props} />,
+      disableFilters: header.columnType == "measure" ? true : false,
+      // Filter: DropdownFilter,
+      filter: "rankedMatchSorter",
       width: !isNaN(header.width) ? parseInt(header.width) : null,
       headerCSS: {
         align: header.align,
         color: header.color,
         background: header.background,
       },
-      Cell: (props) => <Cell props={props} />,
       gct: createProps(layout),
     };
   });
