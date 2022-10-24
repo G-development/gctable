@@ -1,11 +1,11 @@
 import React from "react";
-
-// <th colspan="1" role="columnheader" style="text-align: center; background-color: rgb(92, 235, 232);">Sum(SPT_Size)</th>
+import { DropdownFilter, TextSearchFilter } from "../../features/filters";
 
 const Header = ({ props }) => {
   var self = props.column;
   return (
-    <th
+    <div
+      {...self.getHeaderProps()}
       onClick={() => {
         console.log("this header:", props);
       }}
@@ -25,14 +25,19 @@ const Header = ({ props }) => {
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-around" }}>
-        {props.column.id}
-        <img
-          src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-2.png"
-          width="16px;"
-          style={{ cursor: "pointer" }}
-        />
+        {self.id}
+        {self.canFilter && (
+          <>
+            <img
+              src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-2.png"
+              width="16px;"
+              style={{ cursor: "pointer" }}
+            />
+            <DropdownFilter column={props.column} />
+          </>
+        )}
       </div>
-    </th>
+    </div>
   );
 };
 
