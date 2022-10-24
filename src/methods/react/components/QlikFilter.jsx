@@ -36,33 +36,33 @@ const QlikFilter = ({
           delay={50}
           trigger="click"
         >
-          <button class="lui-button">
+          <button className="lui-button">
             <span
-              class="lui-icon  lui-icon--more"
+              className="lui-icon  lui-icon--more"
               aria-hidden="true"
               style={{ cursor: "pointer" }}
             ></span>
           </button>
         </Tippy>
-        <button class="lui-button">
+        <button className="lui-button">
           <span
-            class="lui-icon lui-icon--clear-selections"
+            className="lui-icon lui-icon--clear-selections"
             aria-hidden="true"
             style={{ cursor: "pointer" }}
           ></span>
         </button>
         <button
-          class="lui-button  lui-button--danger"
+          className="lui-button  lui-button--danger"
           style={{ cursor: "pointer" }}
           onClick={(e) => setFilter("" || undefined)}
         >
-          <span class="lui-icon lui-icon--close" aria-hidden="true"></span>
+          <span className="lui-icon lui-icon--close" aria-hidden="true"></span>
         </button>
         <button
-          class="lui-button  lui-button--success"
+          className="lui-button  lui-button--success"
           style={{ cursor: "pointer" }}
         >
-          <span class="lui-icon lui-icon--tick" aria-hidden="true"></span>
+          <span className="lui-icon lui-icon--tick" aria-hidden="true"></span>
         </button>
       </div>
       {options.map((option, i) => (
