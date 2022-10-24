@@ -4,7 +4,6 @@ import { createRoot } from "react-dom/client";
 import Ext from "./react/Ext";
 
 import "./style.css";
-import "leonardo-ui";
 
 export var qlik = window.require("qlik");
 
