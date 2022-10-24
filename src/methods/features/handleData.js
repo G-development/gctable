@@ -1,8 +1,6 @@
 import React from "react";
 import Header from "../react/components/Header";
 import Cell from "../react/components/Cell";
-import { DropdownFilter, TextSearchFilter } from "./filters";
-
 import { createProps } from "../features/createProps";
 
 export const returnData = (layout) => {
