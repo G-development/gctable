@@ -1,0 +1,10 @@
+.tippy-box[data-theme~="GCTable"] {
+  background-color: white;
+  color: Grey;
+  border: 1px solid black;
+}
+
+.tippy-box[data-theme~="GCTable"] .tippy-arrow {
+  color: white;
+  border: 1px solid black;
+}

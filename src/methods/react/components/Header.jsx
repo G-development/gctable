@@ -1,5 +1,7 @@
 import React from "react";
 import { DropdownFilter, TextSearchFilter } from "../../features/filters";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css"; // optional
 
 const Header = ({ props }) => {
   var self = props.column;
@@ -27,12 +29,22 @@ const Header = ({ props }) => {
         {self.id}
         {self.canFilter && (
           <>
-            <img
-              src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-2.png"
-              width="16px;"
-              style={{ cursor: "pointer" }}
-            />
-            <DropdownFilter column={props.column} />
+            <Tippy
+              theme="GCTable"
+              content=<DropdownFilter column={props.column} />
+              allowHTML={true}
+              interactive={true}
+              interactiveBorder={20}
+              delay={50}
+              trigger="click"
+              style={{ backgroundColor: "white" }}
+            >
+              <img
+                src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-2.png"
+                width="16px;"
+                style={{ cursor: "pointer", margin: "0 10px;" }}
+              />
+            </Tippy>
           </>
         )}
       </div>
