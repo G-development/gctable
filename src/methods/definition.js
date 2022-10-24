@@ -1,5 +1,5 @@
 import { cpAbout, cpString, cpButtonGroup, cpSwitch, cpText } from "./features/util";
-import { navType, textAlign, headerAlign } from "./features/definitionUtils";
+import { navType, textAlign, headerAlign, hideHeader} from "./features/definitionUtils";
 
 export default {
   type: "items",
@@ -22,10 +22,16 @@ export default {
 			textColor: cpString("qAttributeExpressions.7.qExpression", "Text color", "", "always", "string", "expression"),
 			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='left'", textAlign),
 			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
+			// Only for header
+			hideHeader: cpButtonGroup("qAttributeExpressions.15.qExpression", "Header", "='show'", hideHeader),
 			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
+			colSpan: cpString("qAttributeExpressions.16.qExpression", "ColSpan", "", "always", "string", "expression"),
 			colWidth: cpString("qAttributeExpressions.11.qExpression", "Column width", "", "always", "string", "expression"),
 			headerColor: cpString("qAttributeExpressions.12.qExpression", "Header text color", "", "always", "string", "expression"),
 			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "", "always", "string", "expression"),
+			// More
+			replaceIF: cpString("qAttributeExpressions.14.qExpression", "Replace IF", "", "always", "string", "expression"),
+
 		}
 	},
 	measures: {
@@ -45,15 +51,23 @@ export default {
 			textColor: cpString("qAttributeExpressions.7.qExpression", "Text color", "", "always", "string", "expression"),
 			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='left'", textAlign),
 			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
+			// Only for header
+			hideHeader: cpButtonGroup("qAttributeExpressions.15.qExpression", "Header", "='show'", hideHeader),
 			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
+			colSpan: cpString("qAttributeExpressions.16.qExpression", "ColSpan", "", "always", "string", "expression"),
 			colWidth: cpString("qAttributeExpressions.11.qExpression", "Column width", "", "always", "string", "expression"),
 			headerColor: cpString("qAttributeExpressions.12.qExpression", "Header text color", "", "always", "string", "expression"),
 			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "", "always", "string", "expression"),
+			// More
+			replaceIF: cpString("qAttributeExpressions.14.qExpression", "Replace IF", "", "always", "string", "expression"),
 		}
 	},
     settings: {
       	uses: "settings",
     },
+	sorting: {
+		uses: "sorting"
+	},
     config: {
 		type: "items",
 		label: "Configuration",

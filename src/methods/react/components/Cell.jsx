@@ -3,7 +3,9 @@ import { qlik } from "../../paint";
 
 const Cell = ({ props }) => {
   var self = props.value;
-  let { textColor, textSize, textAlign, bgColor } = self.props;
+  let { textColor, textSize, textAlign, bgColor, replaceIF } = self.props;
+
+  debugger;
   return (
     <td
       onClick={() => {
@@ -29,9 +31,10 @@ const Cell = ({ props }) => {
         padding: self.gct.padding,
         border: self.gct.borderSize,
       }}
-    >
-      {self.value}
-    </td>
+      dangerouslySetInnerHTML={{
+        __html: replaceIF != undefined ? replaceIF : self.value,
+      }}
+    ></td>
   );
 };
 

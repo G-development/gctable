@@ -52,4 +52,16 @@ var headerAlign = [
   },
 ];
 
-export { navType, textAlign, headerAlign };
+var hideHeader = [
+  {
+    value: "='hide'",
+    label: "Hide",
+    tooltip: "Hide header",
+  },
+  {
+    value: "='show'",
+    label: "Show",
+    tooltip: "Show header",
+  },
+];
+export { navType, textAlign, headerAlign, hideHeader };

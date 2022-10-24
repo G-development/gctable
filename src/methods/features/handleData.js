@@ -37,6 +37,7 @@ export const returnData = (layout) => {
           textColor: elem?.qAttrExps?.qValues[7]?.qText,
           textAlign: elem?.qAttrExps?.qValues[8]?.qText,
           textSize: elem?.qAttrExps?.qValues[9]?.qText,
+          replaceIF: elem?.qAttrExps?.qValues[14]?.qText,
         },
         gct: createProps(layout),
       };
@@ -52,11 +53,15 @@ const getHeaders = (layout) => {
       return {
         columnType: "dimension",
         title: dim.qFallbackTitle,
+        hide: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[15]?.qText,
         align: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[10]?.qText,
+        span: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[16]?.qNum,
         width: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[11]?.qNum,
         color: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[12]?.qText,
         background:
           hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[13]?.qText,
+        replaceIF:
+          hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[14]?.qText,
       };
     }),
     measHeaders = hc.qMeasureInfo.map((meas, i) => {
@@ -64,11 +69,15 @@ const getHeaders = (layout) => {
       return {
         columnType: "measure",
         title: meas.qFallbackTitle,
+        hide: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[15]?.qText,
         align: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[10]?.qText,
+        span: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[16]?.qNum,
         width: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[11]?.qNum,
         color: hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[12]?.qText,
         background:
           hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[13]?.qText,
+        replaceIF:
+          hc.qDataPages[0]?.qMatrix[0][j]?.qAttrExps?.qValues[14]?.qText,
       };
     }),
     headerTot = dimHeaders.concat(measHeaders);
@@ -83,7 +92,9 @@ const getHeaders = (layout) => {
       filter: "rankedMatchSorter",
       width: !isNaN(header.width) ? parseInt(header.width) : null,
       headerCSS: {
+        hide: header.hide,
         align: header.align,
+        span: header.span,
         color: header.color,
         background: header.background,
       },

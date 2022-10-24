@@ -6,14 +6,16 @@ import "tippy.js/themes/light.css";
 
 const Header = ({ props }) => {
   var self = props.column;
+  debugger;
   return (
     <th
+      role="columnheader"
+      colSpan={self.headerCSS.span}
       onClick={() => {
         console.log("this header:", props);
       }}
       style={{
-        role: "columnheader",
-        colspan: "1",
+        display: self.headerCSS.hide == "hide" ? "none" : "",
         width: self.width,
         textAlign: self.headerCSS.align,
         color: self.headerCSS.color,
