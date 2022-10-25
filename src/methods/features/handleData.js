@@ -53,6 +53,8 @@ const getHeaders = (layout) => {
       return {
         columnType: "dimension",
         title: dim.qFallbackTitle,
+        canFilter:
+          hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[17]?.qText,
         hide: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[15]?.qText,
         align: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[10]?.qText,
         span: hc.qDataPages[0]?.qMatrix[0][i]?.qAttrExps?.qValues[16]?.qNum,
@@ -92,6 +94,7 @@ const getHeaders = (layout) => {
       filter: "rankedMatchSorter",
       width: !isNaN(header.width) ? parseInt(header.width) : null,
       headerCSS: {
+        canFilter: header?.canFilter,
         hide: header.hide,
         align: header.align,
         span: header.span,

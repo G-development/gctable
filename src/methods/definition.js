@@ -1,5 +1,5 @@
 import { cpAbout, cpString, cpButtonGroup, cpSwitch, cpText } from "./features/util";
-import { navType, textAlign, headerAlign, hideHeader} from "./features/definitionUtils";
+import { navType, textAlign, headerAlign, hideHeader, canFilter } from "./features/definitionUtils";
 
 export default {
   type: "items",
@@ -23,6 +23,7 @@ export default {
 			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='left'", textAlign),
 			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
 			// Only for header
+			canFilter: cpButtonGroup("qAttributeExpressions.17.qExpression", "Can filter", "='no'", canFilter),
 			hideHeader: cpButtonGroup("qAttributeExpressions.15.qExpression", "Header", "='show'", hideHeader),
 			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
 			colSpan: cpString("qAttributeExpressions.16.qExpression", "ColSpan", "", "always", "string", "expression"),
@@ -31,7 +32,6 @@ export default {
 			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "", "always", "string", "expression"),
 			// More
 			replaceIF: cpString("qAttributeExpressions.14.qExpression", "Replace IF", "", "always", "string", "expression"),
-
 		}
 	},
 	measures: {

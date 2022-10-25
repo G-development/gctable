@@ -10,7 +10,7 @@ const Header = ({ props }) => {
   return (
     <th
       role="columnheader"
-      colSpan={self.headerCSS.span}
+      colSpan={self.headerCSS.span != NaN ? self.headerCSS.span : 1}
       onClick={() => {
         console.log("this header:", props);
       }}
@@ -30,7 +30,7 @@ const Header = ({ props }) => {
     >
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         {self.id}
-        {self.canFilter && (
+        {self.canFilter && self.headerCSS.canFilter == "yes" && (
           <>
             <Tippy
               // theme="GCTable"
@@ -41,7 +41,6 @@ const Header = ({ props }) => {
               interactiveBorder={20}
               delay={50}
               trigger="click"
-              style={{ backgroundColor: "white" }}
             >
               <span
                 className="lui-icon  lui-icon--search"

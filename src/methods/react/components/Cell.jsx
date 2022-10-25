@@ -5,7 +5,6 @@ const Cell = ({ props }) => {
   var self = props.value;
   let { textColor, textSize, textAlign, bgColor, replaceIF } = self.props;
 
-  debugger;
   return (
     <td
       onClick={() => {

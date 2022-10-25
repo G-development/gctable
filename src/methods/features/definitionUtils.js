@@ -64,4 +64,17 @@ var hideHeader = [
     tooltip: "Show header",
   },
 ];
-export { navType, textAlign, headerAlign, hideHeader };
+
+var canFilter = [
+  {
+    value: "='no'",
+    label: "No",
+    tooltip: "No filter",
+  },
+  {
+    value: "='yes'",
+    label: "Yes",
+    tooltip: "Can filter",
+  },
+];
+export { navType, textAlign, headerAlign, hideHeader, canFilter };
