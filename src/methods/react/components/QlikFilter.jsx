@@ -24,6 +24,9 @@ const QlikFilter = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          position: "sticky",
+          top: 0,
+          backgroundColor: "white",
           padding: 2,
           marginBottom: 4,
         }}

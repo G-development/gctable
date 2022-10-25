@@ -30,11 +30,25 @@ const Cell = ({ props }) => {
         textAlign: textAlign,
         padding: self.gct.padding,
         border: self.gct.borderSize,
+        textOverflow: "ellipsis",
+        maxWidth: "50px",
+        overflowX: "hidden",
       }}
-      dangerouslySetInnerHTML={{
-        __html: replaceIF != undefined ? replaceIF : self.value,
-      }}
-    ></td>
+    >
+      {replaceIF == undefined ? (
+        <abbr
+          title={self.value}
+          style={{ textDecoration: "none", whiteSpace: "nowrap" }}
+        >
+          {self.value}
+        </abbr>
+      ) : (
+        <span
+          style={{ display: "inline" }}
+          dangerouslySetInnerHTML={{ __html: replaceIF }}
+        />
+      )}
+    </td>
   );
 };
 
