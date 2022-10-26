@@ -49,7 +49,7 @@ export default {
 			visibility: cpString("qAttributeExpressions.5.qExpression", "Show column IF", "", "always", "string", "expression"),
 			bgColor: cpString("qAttributeExpressions.6.qExpression", "Background color", "", "always", "string", "expression"),
 			textColor: cpString("qAttributeExpressions.7.qExpression", "Text color", "", "always", "string", "expression"),
-			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='left'", textAlign),
+			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='right'", textAlign),
 			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
 			// Only for header
 			hideHeader: cpButtonGroup("qAttributeExpressions.15.qExpression", "Header", "='show'", hideHeader),

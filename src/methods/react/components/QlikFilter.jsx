@@ -13,6 +13,29 @@ const QlikFilter = ({
     return [...options.values()];
   }, [id, preFilteredRows]);
 
+  const qlikFilterBTNS = [
+    {
+      abbr: "Clear selection",
+      btn: true,
+      btnType: "",
+      icon: "clear-selections",
+    },
+
+    {
+      abbr: "Cancel selections",
+      btn: true,
+      btnType: "danger",
+      btnOnClick: (e) => setFilter("" || undefined),
+      icon: "close",
+    },
+    {
+      abbr: "Apply selections",
+      btn: true,
+      btnType: "success",
+      icon: "tick",
+    },
+  ];
+
   return (
     <div className="qlikFilter" style={{ width: 234, height: 332 }}>
       <div
@@ -40,32 +63,32 @@ const QlikFilter = ({
             <span
               className="lui-icon  lui-icon--more"
               aria-hidden="true"
-              style={{ cursor: "pointer" }}
             ></span>
           </button>
         </Tippy>
-        <button className="lui-button">
-          <span
-            className="lui-icon lui-icon--clear-selections"
-            aria-hidden="true"
-            style={{ cursor: "pointer" }}
-          ></span>
-        </button>
-        <button
-          className="lui-button  lui-button--danger"
-          style={{ cursor: "pointer" }}
-          onClick={(e) => setFilter("" || undefined)}
-        >
-          <span className="lui-icon lui-icon--close" aria-hidden="true"></span>
-        </button>
-        <button
-          className="lui-button  lui-button--success"
-          style={{ cursor: "pointer" }}
-        >
-          <span className="lui-icon lui-icon--tick" aria-hidden="true"></span>
-        </button>
+        {qlikFilterBTNS.map((f, i) => {
+          return (
+            <abbr title={f.abbr} key={i}>
+              <button
+                className={`lui-button  lui-button${
+                  f.btnType != "" ? "--" + f.btnType : ""
+                }`}
+                onClick={f?.btnOnClick}
+              >
+                <span
+                  className={`lui-icon  lui-icon--${f.icon}`}
+                  aria-hidden="true"
+                ></span>
+              </button>
+            </abbr>
+          );
+        })}
       </div>
-      <div className="qlikFilter-items" style={{ height: 300, overflowY: "overlay" }}>
+
+      <div
+        className="qlikFilter-items"
+        style={{ height: 300, overflowY: "overlay" }}
+      >
         {options.map((option, i) => (
           <p
             key={i}
