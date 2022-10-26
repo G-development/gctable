@@ -5,37 +5,35 @@ import "tippy.js/dist/tippy.css"; // optional
 import "tippy.js/themes/light.css";
 
 const Header = ({ props }) => {
-  var self = props.column;
-  debugger;
   return (
     <th
       role="columnheader"
-      colSpan={self.headerCSS.span != NaN ? self.headerCSS.span : 1}
+      colSpan={props.headerCSS.span != NaN ? props.headerCSS.span : 1}
       onClick={() => {
         console.log("this header:", props);
       }}
       style={{
-        display: self.headerCSS.hide == "hide" ? "none" : "",
-        width: self.width,
-        textAlign: self.headerCSS.align,
-        color: self.headerCSS.color,
-        backgroundColor: self.headerCSS.background
-          ? self.headerCSS.background
-          : self.gct.headerColor,
-        padding: self.gct.padding,
-        position: self.gct.fixedHeader.position,
-        top: self.gct.fixedHeader.top,
-        border: self.gct.borderSize,
+        display: props.headerCSS.hide == "hide" ? "none" : "",
+        width: props.width,
+        textAlign: props.headerCSS.align,
+        color: props.headerCSS.color,
+        backgroundColor: props.headerCSS.background
+          ? props.headerCSS.background
+          : props.gct.headerColor,
+        padding: props.gct.padding,
+        position: props.gct.fixedHeader.position,
+        top: props.gct.fixedHeader.top,
+        border: props.gct.borderSize,
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        {self.id}
-        {self.canFilter && self.headerCSS.canFilter == "yes" && (
+        {props.id}
+        {props.canFilter && props.headerCSS.canFilter == "yes" && (
           <>
             <Tippy
               // theme="GCTable"
               theme="light"
-              content=<QlikFilter column={props.column} />
+              content=<QlikFilter column={props} />
               allowHTML={true}
               interactive={true}
               interactiveBorder={20}

@@ -86,11 +86,8 @@ const getHeaders = (layout) => {
 
   var headers = headerTot.map((header) => {
     return {
-      Header: (props) => <Header props={props} />,
       accessor: header.title,
-      Cell: (props) => <Cell props={props} />,
       disableFilters: header.columnType == "measure" ? true : false,
-      // Filter: DropdownFilter,
       filter: "rankedMatchSorter",
       width: !isNaN(header.width) ? parseInt(header.width) : null,
       headerCSS: {

@@ -3,6 +3,9 @@ import { useTable, useColumnOrder, useFilters } from "react-table";
 import { getHiddenColumns } from "../../features/usefulMethods";
 import { matchSorterFn } from "../../features/sorting";
 
+import Header from "./Header";
+import Cell from "./Cell";
+
 const Table = ({ tableData, headers, gct }) => {
   // console.log("tableData", tableData, "headers", headers, "gct", gct);
 
@@ -33,11 +36,9 @@ const Table = ({ tableData, headers, gct }) => {
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <React.Fragment key={column.getHeaderProps().key}>
-                {column.render("Header")}
-              </React.Fragment>
-            ))}
+            {headerGroup.headers.map((column) => {
+              return <Header {...column.getHeaderProps()} props={column} />;
+            })}
           </tr>
         ))}
       </thead>
@@ -46,11 +47,9 @@ const Table = ({ tableData, headers, gct }) => {
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => (
-                <React.Fragment key={cell.getCellProps().key}>
-                  {cell.render("Cell")}
-                </React.Fragment>
-              ))}
+              {row.cells.map((cell) => {
+                return <Cell {...cell.getCellProps()} props={cell} />;
+              })}
             </tr>
           );
         })}
