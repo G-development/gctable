@@ -13,21 +13,21 @@
   font-weight: normal;
 }
 
-.qlikFilter::-webkit-scrollbar {
+.qlikFilter-items::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
-.qlikFilter::-webkit-scrollbar-track {
+.qlikFilter-items::-webkit-scrollbar-track {
   background: transparent;
 }
-.qlikFilter::-webkit-scrollbar-thumb {
+.qlikFilter-items::-webkit-scrollbar-thumb {
   background: rgba(50, 50, 50, 0.3);
   border-radius: 4px;
   transition: all 0.3s ease-in-out;
 }
-.qlikFilter::-webkit-scrollbar-thumb:hover {
+.qlikFilter-items::-webkit-scrollbar-thumb:hover {
   background: rgba(50, 50, 50, 0.5);
 }
-.qlikFilter::-webkit-scrollbar-corner {
+.qlikFilter-items::-webkit-scrollbar-corner {
   background: transparent;
 }

@@ -14,10 +14,7 @@ const QlikFilter = ({
   }, [id, preFilteredRows]);
 
   return (
-    <div
-      className="qlikFilter"
-      style={{ width: 234, height: 332, overflowY: "overlay" }}
-    >
+    <div className="qlikFilter" style={{ width: 234, height: 332 }}>
       <div
         className="qlikFilter-buttons"
         style={{
@@ -68,20 +65,22 @@ const QlikFilter = ({
           <span className="lui-icon lui-icon--tick" aria-hidden="true"></span>
         </button>
       </div>
-      {options.map((option, i) => (
-        <p
-          key={i}
-          value={option}
-          onClick={(e) => setFilter(option || undefined)}
-          style={{
-            borderBottom: "1px solid lightgrey",
-            textAlign: "left",
-            padding: "4px 0",
-          }}
-        >
-          {option}
-        </p>
-      ))}
+      <div className="qlikFilter-items" style={{ height: 300, overflowY: "overlay" }}>
+        {options.map((option, i) => (
+          <p
+            key={i}
+            value={option}
+            onClick={(e) => setFilter(option || undefined)}
+            style={{
+              borderBottom: "1px solid lightgrey",
+              textAlign: "left",
+              padding: "4px 0",
+            }}
+          >
+            {option}
+          </p>
+        ))}
+      </div>
     </div>
   );
 };
