@@ -5,13 +5,19 @@ import Tippy from "@tippyjs/react";
 const QlikFilter = ({
   column: { filterValue, setFilter, preFilteredRows, id },
 }) => {
+  const [search, setSearch] = React.useState(undefined);
+
   const options = React.useMemo(() => {
     const options = new Set();
     preFilteredRows.forEach((row) => {
-      options.add(row.values[id].value);
+      if (
+        row.values[id].value.toLowerCase().includes(search) ||
+        search == undefined
+      )
+        options.add(row.values[id].value);
     });
     return [...options.values()];
-  }, [id, preFilteredRows]);
+  }, [id, preFilteredRows, search]);
 
   const qlikFilterBTNS = [
     {
@@ -84,10 +90,20 @@ const QlikFilter = ({
           );
         })}
       </div>
-
+      {/* SEARCH INPUT */}
+      <div className="qlikFilter-search">
+        <span className="lui-icon  lui-icon--search" aria-hidden="true"></span>
+        <input
+          type="text"
+          className="lui-search__input ng-pristine ng-valid ng-empty ng-valid-maxlength ng-touched"
+          placeholder="Cerca nella casella di elenco"
+          onChange={(e) => setSearch(e.target.value.toLowerCase() || undefined)}
+        />
+      </div>
+      {/* SEARCH ITEMS */}
       <div
         className="qlikFilter-items"
-        style={{ height: 300, overflowY: "overlay" }}
+        style={{ height: 300 - 38, overflowY: "overlay" }}
       >
         {options.map((option, i) => (
           <p

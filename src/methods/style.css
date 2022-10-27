@@ -31,3 +31,17 @@
 .qlikFilter-items::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+.qlikFilter-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qlikFilter-search span {
+  padding: 5px;
+}
+
+.qlikFilter-search input {
+  margin-left: 5px;
+}
