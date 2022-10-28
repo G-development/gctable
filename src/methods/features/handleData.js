@@ -4,10 +4,12 @@ import Cell from "../react/components/Cell";
 import { createProps } from "../features/createProps";
 
 export const returnData = (layout) => {
-  console.log("returnData", layout);
+  // console.log("returnData", layout);
 
-  var hc = layout.qHyperCube;
-  var mat = hc.qDataPages[0].qMatrix;
+  var hc = layout.qHyperCube,
+    mat = [];
+
+  hc.qDataPages.forEach((el) => mat.push(...el.qMatrix));
 
   const headers = getHeaders(layout);
 
