@@ -24,9 +24,9 @@ const Cell = ({ props }) => {
       }}
       style={{
         color: textColor,
-        backgroundColor: bgColor,
+        backgroundColor: self.value === "-" ? "#F2F2F2" : bgColor,
         fontSize: textSize,
-        textAlign: textAlign,
+        textAlign: self.value === "-" ? "left" : textAlign,
         padding: self.gct.padding,
         border: self.gct.borderSize,
         textOverflow: "ellipsis",
@@ -34,7 +34,7 @@ const Cell = ({ props }) => {
         overflowX: "hidden",
       }}
     >
-      {replaceIF == undefined ? (
+      {replaceIF == undefined || self.value === "-" ? (
         <abbr
           title={self.value}
           style={{ textDecoration: "none", whiteSpace: "nowrap" }}
@@ -42,10 +42,12 @@ const Cell = ({ props }) => {
           {self.value}
         </abbr>
       ) : (
-        <span
-          style={{ display: "inline" }}
-          dangerouslySetInnerHTML={{ __html: replaceIF }}
-        />
+        <abbr title={self.value}>
+          <span
+            style={{ display: "inline" }}
+            dangerouslySetInnerHTML={{ __html: replaceIF }}
+          />
+        </abbr>
       )}
     </td>
   );
