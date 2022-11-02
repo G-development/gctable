@@ -1,7 +1,5 @@
-import React from "react";
-import Header from "../react/components/Header";
-import Cell from "../react/components/Cell";
 import { createProps } from "../features/createProps";
+import { createTotalRow } from "../features/usefulMethods";
 
 export const returnData = (layout) => {
   // console.log("returnData", layout);
@@ -11,7 +9,9 @@ export const returnData = (layout) => {
 
   hc.qDataPages.forEach((el) => mat.push(...el.qMatrix));
 
-  const headers = getHeaders(layout);
+  const allProps = createProps(layout);
+
+  const headers = getHeaders(layout, allProps);
 
   const data = [];
 
@@ -41,15 +41,16 @@ export const returnData = (layout) => {
           textSize: elem?.qAttrExps?.qValues[9]?.qText,
           replaceIF: elem?.qAttrExps?.qValues[14]?.qText,
         },
-        gct: createProps(layout),
+        gct: allProps,
       };
     }
     data.push(obj);
   }
+  if (allProps.total) data.unshift(createTotalRow(data, headers));
   return { data, headers };
 };
 
-const getHeaders = (layout) => {
+const getHeaders = (layout, allProps) => {
   var hc = layout.qHyperCube;
   var dimHeaders = hc.qDimensionInfo.map((dim, i) => {
       return {
@@ -100,7 +101,7 @@ const getHeaders = (layout) => {
         color: header.color,
         background: header.background,
       },
-      gct: createProps(layout),
+      gct: allProps,
     };
   });
 

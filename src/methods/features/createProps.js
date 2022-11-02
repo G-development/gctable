@@ -2,6 +2,8 @@ export const createProps = (layout) => {
   var gct = layout.GCT;
   var allProps = {
     /* Configuration */
+    /* TOTAL */
+    total: gct.total && gct.total != null && gct.total != "" ? gct.total : null,
     /* CSS */
     headerColor:
       gct.CSS.headerColor &&

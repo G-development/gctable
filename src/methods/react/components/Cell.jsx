@@ -3,14 +3,17 @@ import { qlik } from "../../paint";
 
 const Cell = ({ props }) => {
   var self = props.value;
-  let { textColor, textSize, textAlign, bgColor, replaceIF } = self.props;
+  var total = self.name === "total" ? true : false;
+  let { textColor, textSize, textAlign, bgColor, replaceIF } = self.props
+    ? self.props
+    : "";
 
   return (
     <td
       onClick={() => {
         console.log("this cell:", props);
         if (
-          self?.nav.navType == "sheet" &&
+          self?.nav?.navType == "sheet" &&
           (self?.nav?.sheet || self?.nav?.sel || self?.nav?.clear)
         ) {
           qlik.fun.promiseNavigationHistory(
@@ -27,8 +30,8 @@ const Cell = ({ props }) => {
         backgroundColor: self.value === "-" ? "#F2F2F2" : bgColor,
         fontSize: textSize,
         textAlign: self.value === "-" ? "left" : textAlign,
-        padding: self.gct.padding,
-        border: self.gct.borderSize,
+        padding: self?.gct?.padding,
+        border: self?.gct?.borderSize,
         textOverflow: "ellipsis",
         maxWidth: "50px",
         overflowX: "hidden",
@@ -39,7 +42,7 @@ const Cell = ({ props }) => {
           title={self.value}
           style={{ textDecoration: "none", whiteSpace: "nowrap" }}
         >
-          {self.value}
+          {total ? <b>{self.value}</b> : self.value}
         </abbr>
       ) : (
         <abbr title={self.value}>

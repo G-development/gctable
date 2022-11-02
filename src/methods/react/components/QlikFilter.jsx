@@ -11,7 +11,7 @@ const QlikFilter = ({
     const options = new Set();
     preFilteredRows.forEach((row) => {
       if (
-        row.values[id].value.toLowerCase().includes(search) ||
+        row.values[id].value?.toLowerCase().includes(search) ||
         search == undefined
       )
         options.add(row.values[id].value);

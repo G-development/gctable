@@ -72,7 +72,7 @@ export default {
 		type: "items",
 		label: "Configuration",
 		items: {
-       		// Insert component
+       		totalSwitch: cpSwitch("GCT.total", "Total row", "Yes", "No", false),
 			headerColor: cpString("GCT.CSS.headerColor", "Header color", "", "", "string"),
 			padding: cpString("GCT.CSS.padding", "Cell padding", "", "", "string"),
 			showBorder: cpSwitch("GCT.CSS.border", "Show border", "Yes", "No", false),
