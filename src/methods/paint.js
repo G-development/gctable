@@ -7,22 +7,26 @@ import "./style.css";
 export var qlik = window.require("qlik");
 
 export default function paint($element, layout) {
-  // console.log("Paint", layout);
+  console.log("Paint", layout);
+
   var lastrow = 0,
-    me = this;
-
+    me = this,
+    totRows = this.backendApi.getRowCount();
   this.backendApi.eachDataRow((rownum) => (lastrow = rownum));
+  var lastRowCheck = lastrow < 40000 ? true : false;
 
-  if (this.backendApi.getRowCount() > lastrow + 1) {
+  console.log(totRows, lastrow);
+  if (totRows > lastrow + 1 && lastRowCheck) {
     var requestPage = [
       {
         qTop: lastrow + 1,
         qLeft: 0,
         qWidth: 40,
-        qHeight: Math.min(1000, this.backendApi.getRowCount() - lastrow),
+        qHeight: Math.min(800, totRows - lastrow),
       },
     ];
     this.backendApi.getData(requestPage).then(function (dataPages) {
+      console.log(dataPages);
       me.paint($element, layout);
     });
   }
