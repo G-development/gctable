@@ -12,14 +12,19 @@ export default function paint($element, layout) {
     me = this;
 
   this.backendApi.eachDataRow((rownum) => (lastrow = rownum));
+  // console.log("Tot rows", this.backendApi.getRowCount());
+  // console.log("lastrow", lastrow);
 
-  if (this.backendApi.getRowCount() > lastrow + 1) {
+  if (this.backendApi.getRowCount() > lastrow + 1 && lastrow < 5000) {
     var requestPage = [
       {
         qTop: lastrow + 1,
         qLeft: 0,
-        qWidth: 40,
-        qHeight: Math.min(1000, this.backendApi.getRowCount() - lastrow),
+        qWidth: layout.qHyperCube.qSize.qcx, //40,
+        qHeight: Math.min(
+          10000 / layout.qHyperCube.qSize.qcx, //1000
+          this.backendApi.getRowCount() - lastrow
+        ),
       },
     ];
     this.backendApi.getData(requestPage).then(function (dataPages) {

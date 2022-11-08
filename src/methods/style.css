@@ -45,3 +45,26 @@
 .qlikFilter-search input {
   margin-left: 5px;
 }
+
+.virtualizedRows {
+  overflow-y: overlay !important;
+}
+
+.virtualizedRows::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.virtualizedRows::-webkit-scrollbar-track {
+  background: transparent;
+}
+.virtualizedRows::-webkit-scrollbar-thumb {
+  background: rgba(50, 50, 50, 0.3);
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+}
+.virtualizedRows::-webkit-scrollbar-thumb:hover {
+  background: rgba(50, 50, 50, 0.5);
+}
+.virtualizedRows::-webkit-scrollbar-corner {
+  background: transparent;
+}

@@ -9,7 +9,8 @@ const Cell = ({ props }) => {
     : "";
 
   return (
-    <td
+    <div
+      className="td"
       onClick={() => {
         console.log("this cell:", props);
         if (
@@ -33,7 +34,9 @@ const Cell = ({ props }) => {
         padding: self?.gct?.padding,
         border: self?.gct?.borderSize,
         textOverflow: "ellipsis",
-        maxWidth: "50px",
+        // minWidth: "50px",
+        // maxWidth: "50px",
+        width: props.column.width,
         overflowX: "hidden",
       }}
     >
@@ -52,7 +55,7 @@ const Cell = ({ props }) => {
           />
         </abbr>
       )}
-    </td>
+    </div>
   );
 };
 

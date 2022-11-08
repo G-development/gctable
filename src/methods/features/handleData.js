@@ -30,7 +30,11 @@ export const returnData = (layout) => {
           navType: elem?.qAttrExps?.qValues[0]?.qText,
           navUrl: elem?.qAttrExps?.qValues[1]?.qText,
           sheet: elem?.qAttrExps?.qValues[2]?.qText,
-          sel: elem?.qAttrExps?.qValues[3]?.qText,
+          sel: elem?.qAttrExps?.qValues[3]?.qText
+            ? elem?.qAttrExps?.qValues[3]?.qText
+            : layout.qHyperCube?.qDimensionInfo[j]?.qFallbackTitle +
+              ";" +
+              elem.qText,
           clear: elem?.qAttrExps?.qValues[4]?.qText,
         },
         props: {
@@ -92,7 +96,9 @@ const getHeaders = (layout, allProps) => {
       accessor: header.title,
       disableFilters: header.columnType == "measure" ? true : false,
       filter: "rankedMatchSorter",
-      width: !isNaN(header.width) ? parseInt(header.width) : null,
+      width: !isNaN(header.width) ? parseInt(header.width) : 150,
+      minWidth: 30,
+      maxWidth: !isNaN(header.width) ? parseInt(header.width) : 150,
       headerCSS: {
         canFilter: header?.canFilter,
         hide: header.hide,
@@ -100,6 +106,7 @@ const getHeaders = (layout, allProps) => {
         span: header.span,
         color: header.color,
         background: header.background,
+        // minWidth: 50,
       },
       gct: allProps,
     };

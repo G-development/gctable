@@ -11,7 +11,7 @@ export default {
 		max: 20,
 		items: {
 			// Navigation
-			navType: cpButtonGroup("qAttributeExpressions.0.qExpression", "Navigation type", "='none'", navType),
+			navType: cpButtonGroup("qAttributeExpressions.0.qExpression", "Navigation type", "='sheet'", navType),
 			navUrl: cpString("qAttributeExpressions.1.qExpression", "URL navigation", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='url'"),
 			navSheet: cpString("qAttributeExpressions.2.qExpression", "Sheet navigation", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='sheet'"),
 			navSel: cpString("qAttributeExpressions.3.qExpression", "Value to select(Field;value|Field;value:value:..)", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='sheet'"),
@@ -75,7 +75,7 @@ export default {
        		totalSwitch: cpSwitch("GCT.total", "Total row", "Yes", "No", false),
 			headerColor: cpString("GCT.CSS.headerColor", "Header color", "", "", "string"),
 			padding: cpString("GCT.CSS.padding", "Cell padding", "", "", "string"),
-			showBorder: cpSwitch("GCT.CSS.border", "Show border", "Yes", "No", false),
+			showBorder: cpSwitch("GCT.CSS.border", "Show border", "Yes", "No", true),
 			borderSize: cpString("GCT.CSS.borderSize", "Custom cell border", "", "", "string", null, (data) => data.GCT.CSS.border),
 			fixedHeader: cpSwitch("GCT.CSS.fixedHeader", "Fixed header", "Yes", "No", false),
 			divider: cpText(" "),

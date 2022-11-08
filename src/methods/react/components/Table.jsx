@@ -1,5 +1,11 @@
 import React, { useMemo } from "react";
-import { useTable, useColumnOrder, useFilters } from "react-table";
+import {
+  useTable,
+  useColumnOrder,
+  useFilters,
+  useBlockLayout,
+} from "react-table";
+import { FixedSizeList } from "react-window";
 import { getHiddenColumns } from "../../features/usefulMethods";
 import { matchSorterFn } from "../../features/sorting";
 
@@ -25,36 +31,60 @@ const Table = ({ tableData, headers, gct }) => {
       },
     },
     useColumnOrder,
-    useFilters
+    useFilters,
+    useBlockLayout
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    totalColumnsWidth,
+  } = tableInstance;
+
+  const RenderRow = React.useCallback(
+    ({ index, style }) => {
+      const row = rows[index];
+      prepareRow(row);
+      return (
+        <div {...row.getRowProps({ style })} className="tr">
+          {row.cells.map((cell) => {
+            return (
+              <Cell {...cell.getCellProps()} props={cell} />
+            );
+          })}
+        </div>
+      );
+    },
+    [prepareRow, rows]
+  );
 
   return (
-    <table {...getTableProps()}>
-      <thead>
+    <div {...getTableProps()} className="table">
+      <div className="thead">
         {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
+          <div {...headerGroup.getHeaderGroupProps()} className="tr">
             {headerGroup.headers.map((column) => {
               return <Header {...column.getHeaderProps()} props={column} />;
             })}
-          </tr>
+          </div>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return <Cell {...cell.getCellProps()} props={cell} />;
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+      </div>
+      <div {...getTableBodyProps()} className="tbody">
+        <FixedSizeList
+          height={$("#GC-Table_" + gct.qInfo.qId).height() - 35}
+          itemCount={rows.length}
+          itemSize={35}
+          width={totalColumnsWidth}
+          className="virtualizedRows"
+          zIndex={1}
+        >
+          {RenderRow}
+        </FixedSizeList>
+      </div>
+    </div>
   );
 };
 

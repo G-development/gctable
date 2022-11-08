@@ -6,7 +6,8 @@ import "tippy.js/themes/light.css";
 
 const Header = ({ props }) => {
   return (
-    <th
+    <div
+      className="th"
       role="columnheader"
       colSpan={props.headerCSS.span != NaN ? props.headerCSS.span : 1}
       onClick={() => {
@@ -49,7 +50,7 @@ const Header = ({ props }) => {
           </>
         )}
       </div>
-    </th>
+    </div>
   );
 };
 
