@@ -33,6 +33,7 @@ const Header = ({ props }) => {
           <>
             <Tippy
               // theme="GCTable"
+              appendTo={() => document.body}
               theme="light"
               content=<QlikFilter column={props} />
               allowHTML={true}
