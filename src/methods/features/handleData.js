@@ -32,7 +32,7 @@ export const returnData = (layout) => {
           sheet: elem?.qAttrExps?.qValues[2]?.qText,
           sel: elem?.qAttrExps?.qValues[3]?.qText
             ? elem?.qAttrExps?.qValues[3]?.qText
-            : layout.qHyperCube?.qDimensionInfo[j]?.qFallbackTitle +
+            : layout.qHyperCube?.qDimensionInfo[j]?.qGroupFieldDefs[0] +
               ";" +
               elem.qText,
           clear: elem?.qAttrExps?.qValues[4]?.qText,
@@ -57,6 +57,7 @@ export const returnData = (layout) => {
 const getHeaders = (layout, allProps) => {
   var hc = layout.qHyperCube;
   var dimHeaders = hc.qDimensionInfo.map((dim, i) => {
+
       return {
         columnType: "dimension",
         title: dim.qFallbackTitle,
