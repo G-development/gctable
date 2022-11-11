@@ -23,7 +23,7 @@ export default {
 			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='left'", textAlign),
 			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
 			// Only for header
-			canFilter: cpButtonGroup("qAttributeExpressions.17.qExpression", "Can filter", "='no'", canFilter),
+			canFilter: cpButtonGroup("qAttributeExpressions.17.qExpression", "Can filter", "='yes'", canFilter),
 			hideHeader: cpButtonGroup("qAttributeExpressions.15.qExpression", "Header", "='show'", hideHeader),
 			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
 			colSpan: cpString("qAttributeExpressions.16.qExpression", "ColSpan", "", "always", "string", "expression"),
@@ -77,7 +77,7 @@ export default {
 			padding: cpString("GCT.CSS.padding", "Cell padding", "", "", "string"),
 			showBorder: cpSwitch("GCT.CSS.border", "Show border", "Yes", "No", true),
 			borderSize: cpString("GCT.CSS.borderSize", "Custom cell border", "", "", "string", null, (data) => data.GCT.CSS.border),
-			fixedHeader: cpSwitch("GCT.CSS.fixedHeader", "Fixed header", "Yes", "No", false),
+			// fixedHeader: cpSwitch("GCT.CSS.fixedHeader", "Fixed header", "Yes", "No", false),
 			divider: cpText(" "),
 			warning: cpText("Custom order requires a page refresh!"),
 			customOrder: cpString("GCT.customOrder", 'Column order: ["name", "name",...]', "", "", "string"),
