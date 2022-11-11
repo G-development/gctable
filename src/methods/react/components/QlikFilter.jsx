@@ -1,5 +1,6 @@
 import React from "react";
 import Tippy from "@tippyjs/react";
+import { qlik } from "../../paint";
 
 // Qlik Filter component
 const QlikFilter = ({
@@ -9,14 +10,17 @@ const QlikFilter = ({
 
   const options = React.useMemo(() => {
     const options = new Set();
+    const navs = new Set();
     preFilteredRows.forEach((row) => {
       if (
         row.values[id].value?.toLowerCase().includes(search) ||
         search == undefined
-      )
+      ) {
         options.add(row.values[id].value);
+        navs.add(row.values[id]?.nav?.sel);
+      }
     });
-    return [...options.values()];
+    return { option: [...options.values()], navs: [...navs.values()] };
   }, [id, preFilteredRows, search]);
 
   const qlikFilterBTNS = [
@@ -43,8 +47,8 @@ const QlikFilter = ({
   ];
 
   return (
-    <div className="qlikFilter" style={{ width: 234, height: 332 }}>
-      <div
+    <div className="qlikFilter" style={{ width: 234, maxHeight: 332 }}>
+      {/* <div
         className="qlikFilter-buttons"
         style={{
           display: "flex",
@@ -65,7 +69,7 @@ const QlikFilter = ({
           delay={50}
           trigger="click"
         >
-          <button className="lui-button">
+          <button className="lui-button lui-disabled">
             <span
               className="lui-icon  lui-icon--more"
               aria-hidden="true"
@@ -89,34 +93,53 @@ const QlikFilter = ({
             </abbr>
           );
         })}
-      </div>
+      </div> */}
       {/* SEARCH INPUT */}
       <div className="qlikFilter-search">
         <span className="lui-icon  lui-icon--search" aria-hidden="true"></span>
         <input
           type="text"
           className="lui-search__input ng-pristine ng-valid ng-empty ng-valid-maxlength ng-touched"
-          placeholder="Cerca nella casella di elenco"
+          placeholder="Search in listbox"
           onChange={(e) => setSearch(e.target.value.toLowerCase() || undefined)}
         />
       </div>
       {/* SEARCH ITEMS */}
       <div
         className="qlikFilter-items"
-        style={{ height: 300 - 38, overflowY: "overlay" }}
+        style={{
+          height: 300 - 38,
+          overflowY: "overlay",
+          whiteSpace: "nowrap",
+          overflowX: "hidden",
+          textOverflow: "ellipsis",
+        }}
       >
-        {options.map((option, i) => (
+        {options.option.map((option, i) => (
           <p
             key={i}
             value={option}
-            onClick={(e) => setFilter(option || undefined)}
+            onClick={(e) => {
+              setFilter(option || undefined);
+              qlik.fun.promiseNavigationHistory(
+                null,
+                options.navs[i],
+                null,
+                false
+              );
+            }}
             style={{
               borderBottom: "1px solid lightgrey",
               textAlign: "left",
               padding: "4px 0",
             }}
           >
-            {option}
+            <abbr
+              title={option}
+              style={{ textDecoration: "none", fontSize: 12 }}
+            >
+              {option}
+            </abbr>
           </p>
         ))}
       </div>

@@ -57,7 +57,6 @@ export const returnData = (layout) => {
 const getHeaders = (layout, allProps) => {
   var hc = layout.qHyperCube;
   var dimHeaders = hc.qDimensionInfo.map((dim, i) => {
-
       return {
         columnType: "dimension",
         title: dim.qFallbackTitle,
