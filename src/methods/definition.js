@@ -10,6 +10,7 @@ export default {
 		min: 0,
 		max: 20,
 		items: {
+			visibility: { type: "string", label: "Show column if", ref: "qCalcCondition.qCond.qv", component: "expression" },
 			// Navigation
 			navType: cpButtonGroup("qAttributeExpressions.0.qExpression", "Navigation type", "='sheet'", navType),
 			navUrl: cpString("qAttributeExpressions.1.qExpression", "URL navigation", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='url'"),
@@ -17,21 +18,20 @@ export default {
 			navSel: cpString("qAttributeExpressions.3.qExpression", "Value to select(Field;value|Field;value:value:..)", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='sheet'"),
 			navClear: cpString("qAttributeExpressions.4.qExpression", "Value to clear(Field|Field)", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='sheet'"),
 			// Settings	
-			visibility: cpString("qAttributeExpressions.5.qExpression", "Show column IF", "", "always", "string", "expression"),
-			bgColor: cpString("qAttributeExpressions.6.qExpression", "Background color", "", "always", "string", "expression"),
-			textColor: cpString("qAttributeExpressions.7.qExpression", "Text color", "", "always", "string", "expression"),
-			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='left'", textAlign),
-			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
+			bgColor: cpString("qAttributeExpressions.5.qExpression", "Background color", "", "always", "string", "expression"),
+			textColor: cpString("qAttributeExpressions.6.qExpression", "Text color", "", "always", "string", "expression"),
+			textAlign: cpButtonGroup("qAttributeExpressions.7.qExpression", "Text align", "='left'", textAlign),
+			textSize: cpString("qAttributeExpressions.8.qExpression", "Text size", "", "always", "string", "expression"),
 			// Only for header
-			canFilter: cpButtonGroup("qAttributeExpressions.17.qExpression", "Can filter", "='yes'", canFilter),
-			hideHeader: cpButtonGroup("qAttributeExpressions.15.qExpression", "Header", "='show'", hideHeader),
-			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
-			colSpan: cpString("qAttributeExpressions.16.qExpression", "ColSpan", "", "always", "string", "expression"),
-			colWidth: cpString("qAttributeExpressions.11.qExpression", "Column width", "", "always", "string", "expression"),
-			headerColor: cpString("qAttributeExpressions.12.qExpression", "Header text color", "", "always", "string", "expression"),
-			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "", "always", "string", "expression"),
+			canFilter: cpButtonGroup("qAttributeExpressions.16.qExpression", "Can filter", "='yes'", canFilter),
+			hideHeader: cpButtonGroup("qAttributeExpressions.14.qExpression", "Header", "='show'", hideHeader),
+			headerAlign: cpButtonGroup("qAttributeExpressions.9.qExpression", "Header align", "='center'", headerAlign),
+			colSpan: cpString("qAttributeExpressions.15.qExpression", "ColSpan", "", "always", "string", "expression"),
+			colWidth: cpString("qAttributeExpressions.10.qExpression", "Column width", "", "always", "string", "expression"),
+			headerColor: cpString("qAttributeExpressions.11.qExpression", "Header text color", "", "always", "string", "expression"),
+			headerBG: cpString("qAttributeExpressions.12.qExpression", "Header background color", "", "always", "string", "expression"),
 			// More
-			replaceIF: cpString("qAttributeExpressions.14.qExpression", "Replace IF", "", "always", "string", "expression"),
+			replaceIF: cpString("qAttributeExpressions.13.qExpression", "Replace IF", "", "always", "string", "expression"),
 		}
 	},
 	measures: {
@@ -39,6 +39,7 @@ export default {
 		min: 0,
 		max: 20,
 		items: {
+			visibility: { type: "string", label: "Show column if", ref: "qCalcCondition.qCond.qv", component: "expression" },
 			// Navigation
 			navType: cpButtonGroup("qAttributeExpressions.0.qExpression", "Navigation type", "='none'", navType),
 			navUrl: cpString("qAttributeExpressions.1.qExpression", "URL navigation", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='url'"),
@@ -46,20 +47,19 @@ export default {
 			navSel: cpString("qAttributeExpressions.3.qExpression", "Value to select(Field;value|Field;value:value:..)", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='sheet'"),
 			navClear: cpString("qAttributeExpressions.4.qExpression", "Value to clear(Field|Field)", "", "always", "string", "expression", (data) => data.qAttributeExpressions[0].qExpression == "='sheet'"),
 			// Settings	
-			visibility: cpString("qAttributeExpressions.5.qExpression", "Show column IF", "", "always", "string", "expression"),
-			bgColor: cpString("qAttributeExpressions.6.qExpression", "Background color", "", "always", "string", "expression"),
-			textColor: cpString("qAttributeExpressions.7.qExpression", "Text color", "", "always", "string", "expression"),
-			textAlign: cpButtonGroup("qAttributeExpressions.8.qExpression", "Text align", "='right'", textAlign),
-			textSize: cpString("qAttributeExpressions.9.qExpression", "Text size", "", "always", "string", "expression"),
+			bgColor: cpString("qAttributeExpressions.5.qExpression", "Background color", "", "always", "string", "expression"),
+			textColor: cpString("qAttributeExpressions.6.qExpression", "Text color", "", "always", "string", "expression"),
+			textAlign: cpButtonGroup("qAttributeExpressions.7.qExpression", "Text align", "='right'", textAlign),
+			textSize: cpString("qAttributeExpressions.8.qExpression", "Text size", "", "always", "string", "expression"),
 			// Only for header
-			hideHeader: cpButtonGroup("qAttributeExpressions.15.qExpression", "Header", "='show'", hideHeader),
-			headerAlign: cpButtonGroup("qAttributeExpressions.10.qExpression", "Header align", "='center'", headerAlign),
-			colSpan: cpString("qAttributeExpressions.16.qExpression", "ColSpan", "", "always", "string", "expression"),
-			colWidth: cpString("qAttributeExpressions.11.qExpression", "Column width", "", "always", "string", "expression"),
-			headerColor: cpString("qAttributeExpressions.12.qExpression", "Header text color", "", "always", "string", "expression"),
-			headerBG: cpString("qAttributeExpressions.13.qExpression", "Header background color", "", "always", "string", "expression"),
+			hideHeader: cpButtonGroup("qAttributeExpressions.14.qExpression", "Header", "='show'", hideHeader),
+			headerAlign: cpButtonGroup("qAttributeExpressions.9.qExpression", "Header align", "='center'", headerAlign),
+			colSpan: cpString("qAttributeExpressions.15.qExpression", "ColSpan", "", "always", "string", "expression"),
+			colWidth: cpString("qAttributeExpressions.10.qExpression", "Column width", "", "always", "string", "expression"),
+			headerColor: cpString("qAttributeExpressions.11.qExpression", "Header text color", "", "always", "string", "expression"),
+			headerBG: cpString("qAttributeExpressions.12.qExpression", "Header background color", "", "always", "string", "expression"),
 			// More
-			replaceIF: cpString("qAttributeExpressions.14.qExpression", "Replace IF", "", "always", "string", "expression"),
+			replaceIF: cpString("qAttributeExpressions.13.qExpression", "Replace IF", "", "always", "string", "expression"),
 		}
 	},
     settings: {
@@ -67,6 +67,14 @@ export default {
     },
 	sorting: {
 		uses: "sorting"
+	},
+	addons: {
+		uses: "addons",
+		items: {
+			dataHandling: {
+				uses: "dataHandling"
+			}
+		}
 	},
     config: {
 		type: "items",
@@ -77,7 +85,6 @@ export default {
 			padding: cpString("GCT.CSS.padding", "Cell padding", "", "", "string"),
 			showBorder: cpSwitch("GCT.CSS.border", "Show border", "Yes", "No", true),
 			borderSize: cpString("GCT.CSS.borderSize", "Custom cell border", "", "", "string", null, (data) => data.GCT.CSS.border),
-			// fixedHeader: cpSwitch("GCT.CSS.fixedHeader", "Fixed header", "Yes", "No", false),
 			divider: cpText(" "),
 			warning: cpText("Custom order requires a page refresh!"),
 			customOrder: cpString("GCT.customOrder", 'Column order: ["name", "name",...]', "", "", "string"),
